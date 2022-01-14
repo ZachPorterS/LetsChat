@@ -10,11 +10,11 @@ const ChatFeed = (props) => {
     const renderReadReceipts = (message, isMyMessage) => {
         return chat.people.map((person, index) => person.last_read === message.id && (
             <div 
-            key={'read_${index}'}
+            key={`read_${index}`}
             className="read-receipt"
             style={{
                 float: isMyMessage ? 'right' : 'left',
-                backgroundImage: {backgroundImage: 'url(${person?.person?.avatar})'}
+                backgroundImage: `url(${person?.person?.avatar})`,
             }}/>
         ))
     }
@@ -30,14 +30,15 @@ const ChatFeed = (props) => {
             const isMyMessage = userName === message.sender.userName;
 
             return (
-                <div key={'msg_${index}'} style={{width : '100%'}}>
+                <div key={`msg_${index}`} style={{width : '100%'}}>
                     <div className="message-block">
                         {
-                            isMyMessage ? <MyMessage message={message}/>
+                            isMyMessage 
+                            ? <MyMessage message={message}/>
                             : <TheirMessage message={message} lastMessage={messages[lastMessageKey]}/>
                         }
                     </div>
-                    <div className="read-receipts" style={{marginRight: isMyMessage ? '18px' : '0px', marginLeft: isMyMessage ? '0px' : '16px'}}>
+                    <div className="read-receipts" style={{marginRight: isMyMessage ? '18px' : '0px', marginLeft: isMyMessage ? '0px' : '68px'}}>
                         {renderReadReceipts(message, isMyMessage)}
                     </div>
                 </div>
@@ -51,13 +52,13 @@ const ChatFeed = (props) => {
             <div className="chat-title-container">
                 <div className="chat-title">{chat?.title}</div>
                 <div className="chat-subtitle">
-                    {chat.people.map((person) => ' ${person.person.userName}')}
+                    {chat.people.map((person) => `${person.person.userName}`)}
                 </div>
             </div>
             {renderMessages()}
             <div style={{ height: '100px'}}/>
             <div className="message-form-container">
-                <MessageForm {... props} chatId={activeChat}/>
+                <MessageForm { ...props} chatId={activeChat}/>
             </div>
         </div>
     );

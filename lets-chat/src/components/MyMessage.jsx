@@ -9,11 +9,11 @@ const MyMessage = ({message}) => {
                 className="message-image"
                 style={{float: 'right'}}
             />
-        );
+        )
     }
     /* Message is plain text */
     return (
-        <div className="message" style={{float: 'right', marginRight: '18px', color: 'white', backgroundColor: '#3b2a50'}}>
+        <div className="message" style={{float: 'right', marginRight: '18px', color: 'white', backgroundColor: '#3eb489'}}>
             {message.text}
         </div>
     );
